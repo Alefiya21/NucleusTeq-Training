@@ -14,13 +14,11 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
-    // ✅ Serve login page when visiting /hr/login
     @GetMapping("/login")
     public String loginPage() {
         return "login"; // Returns login.html from templates/
     }
 
-    // ✅ Process HR login
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         if (hrService.login(email, password).equals("Login Successful")) {
@@ -32,7 +30,6 @@ public class HRController {
         }
     }
 
-    // ✅ Logout and redirect to login page
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
