@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-container">
+            <header>
+                <h2>Employee Dashboard</h2>
+                <a href="/hr/logout" class="logout-btn">Logout</a>
+            </header>
+
+            <section class="employee-form">
+                <h3>Add Employee</h3>
+                <form action="/employees/save" method="post">
+                    <input type="hidden" name="id" th:value="${employee?.id}">
+                    <input type="text" name="name" placeholder="Name" th:value="${employee?.name}" required>
+                    <input type="text" name="department" placeholder="Department" th:value="${employee?.department}" required>
+                    <input type="email" name="email" placeholder="Email" th:value="${employee?.email}" required>
+                    <input type="number" name="salary" placeholder="Salary" th:value="${employee?.salary}" required>
+                    <button type="submit" class="save-btn">Save Employee</button>
+                </form>
+            </section>
+
+            <section class="employee-list">
+                <h3>Employee List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Salary</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="emp : ${employees}">
+                            <td th:text="${emp.id}"></td>
+                            <td th:text="${emp.name}"></td>
+                            <td th:text="${emp.department}"></td>
+                            <td th:text="${emp.email}"></td>
+                            <td th:text="${emp.salary}"></td>
+                            <td>
+                                <a th:href="@{/employees/edit/{id}(id=${emp.id})}" class="edit-btn">Edit</a>
+                                <a th:href="@{/employees/delete/{id}(id=${emp.id})}" class="delete-btn" onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
