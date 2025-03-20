@@ -8,6 +8,5 @@ This is a **Spring Boot HR Portal** that allows administrators to manage employe
 - User Authentication (Admin Login)
 - Responsive UI
 
-
 # Access the Application using this url on browser:
 - http://localhost:8000/hr/login
